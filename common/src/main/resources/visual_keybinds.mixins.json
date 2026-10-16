@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "de.aiodane.visual_keybinds.mixin",
+  "package": "de.aiodane.mixin",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "client": [

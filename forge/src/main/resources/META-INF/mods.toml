@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[36,)"
-#issueTrackerURL = ""
-license = "All Rights Reserved"
+issueTrackerURL = "https://github.com/aiodane/visual_keybinds/issues"
+license = "ARR"
 
 [[mods]]
 modId = "visual_keybinds"
@@ -9,9 +9,9 @@ version = "${version}"
 displayName = "Visual Keybinds"
 authors = "Aiodane"
 description = '''
-
+View and configure your keybinds more conveniently.
 '''
-#logoFile = ""
+logoFile = "assets/icon.jpg"
 
 [[dependencies.visual_keybinds]]
 modId = "forge"

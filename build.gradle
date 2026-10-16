@@ -1,7 +1,7 @@
 plugins {
     id 'dev.architectury.loom' version '1.17-SNAPSHOT' apply false
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id 'architectury-plugin' version '3.5-SNAPSHOT'
+    id 'com.gradleup.shadow' version '9.4.3' apply false
 }
 
 architectury {
@@ -33,7 +33,7 @@ subprojects {
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-        mappings loom.officialMojangMappings()
+        mappings "net.fabricmc:yarn:$rootProject.yarn_mappings:v2"
     }
 
     java {
@@ -42,8 +42,8 @@ subprojects {
         // If you remove this line, sources will not be generated.
         withSourcesJar()
 
-        sourceCompatibility = JavaVersion.VERSION_8
-        targetCompatibility = JavaVersion.VERSION_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     tasks.withType(JavaCompile).configureEach {

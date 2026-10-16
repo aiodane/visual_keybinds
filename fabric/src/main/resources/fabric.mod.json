@@ -3,13 +3,18 @@
   "id": "visual_keybinds",
   "version": "${version}",
   "name": "Visual Keybinds",
-  "description": "",
-  "authors": ["Aiodane"],
+  "description": "View and configure your keybinds more conveniently.",
+  "authors": [
+    "Aiodane"
+  ],
   "contact": {
-    "homepage": ""  },
-  "license": "All-Rights-Reserved",
-  "icon": "assets/visual_keybinds/icon.png",
-  "environment": "*",
+    "email": "hey@aiodane.de",
+    "issues": "https://github.com/aiodane/visual_keybinds/issues",
+    "sources": "https://github.com/aiodane/visual_keybinds"
+  },
+  "license": "ARR",
+  "icon": "assets/icon.jpg",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "de.aiodane.visual_keybinds.fabric.MainFabric"
@@ -24,9 +29,9 @@
   "depends": {
     "fabricloader": ">=0.20.0",
     "minecraft": "~1.16.5",
-    "java": ">=8"
-    ,"architectury": ">=1.32.68"
-    ,"fabric-api": "*"
+    "java": ">=8",
+    "architectury": ">=1.32.68",
+    "fabric": "*"
   },
   "suggests": {
     "another-mod": "*"
