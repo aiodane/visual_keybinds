@@ -1,7 +1,7 @@
 package de.aiodane.visual_keybinds.forge;
 
 import de.aiodane.visual_keybinds.Main;
-import dev.architectury.platform.forge.EventBuses;
+import me.shedaniel.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

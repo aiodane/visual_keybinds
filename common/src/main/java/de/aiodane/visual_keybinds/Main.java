@@ -1,79 +1,51 @@
 package de.aiodane.visual_keybinds;
 
-import org.apache.commons.io.FileUtils;
+import de.aiodane.visual_keybinds.config.ModConfig;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.TranslatableText;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class Main {
     public static final String MOD_ID = "visual_keybinds";
+    public static final Logger LOGGER = LogManager.getLogger("visual_keybinds");
+    public static final int CONFIG_VERSION = 1;
 
-    private static final int langVersion = 1;
-    private static final int mainConfigVersion = 1;
-
-    public static FileConfiguration mainConfig;
-
-    public static Logger logger;
-
-    private static File langFile;
-
-    public static FileConfiguration lang;
+    private static ConfigHolder<ModConfig> configHolder;
+    public static ModConfig mainConfig;
 
     public static void init() {
-        // Write common init code here.
-        logger = getLogger();
+        configHolder = AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
         loadMainConfig();
-        setupLang();
+        LOGGER.info("Visual Keybinds initialized successfully!");
     }
 
     private static void loadMainConfig() {
-        saveDefaultConfig();
-        mainConfig = getConfig();
-        if (mainConfig.getInt("config-ver") != mainConfigVersion) {
-            logger.log(Level.WARNING, "MainConfig outdated or wrong configured, reloading config from resources...");
-            saveResource("config.yml", true);
+        mainConfig = configHolder.getConfig();
+
+        if (mainConfig.configVer != CONFIG_VERSION) {
+            LOGGER.warn("MainConfig outdated or malformed (expected V" + CONFIG_VERSION + ", got V" + mainConfig.configVer + "), restoring from default...");
+            configHolder.resetToDefault();
+            configHolder.save();
+            mainConfig = configHolder.getConfig();
         }
-        mainConfig = getConfig();
     }
 
-    private static void setupLang(){
-        String l = mainConfig.getString("language", "en");
-        File f = getDataFolder();
-        File langFolder = new File(f, "lang");
-        if (!langFolder.exists()) {
-            try {
-                if (!langFolder.mkdirs()) throw new IOException("Could not create directory");
-                saveResource("lang/de.yml", false);
-                saveResource("lang/en.yml", false);
-                logger.log(Level.INFO, "Language Packs could not be found, reloading Packs from resources...");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (!langFolder.isDirectory()) {
-            try {
-                FileUtils.forceDelete(langFolder);
-                if (!langFolder.mkdirs()) throw new IOException("Could not create directory");
-                saveResource("lang/de.yml", false);
-                saveResource("lang/en.yml", false);
-                logger.log(Level.INFO, "Language Packs could not be found, reloading Packs from resources...");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public static void saveMainConfig() {
+        if (configHolder != null) {
+            configHolder.save();
         }
-        langFile = new File(getDataFolder()+"/lang/"+ l + ".yml");
-        lang = YamlConfiguration.loadConfiguration(langFile);
-        if (lang.getInt("lang-ver") != langVersion) {
-            logger.log(Level.WARNING, "Language Packs outdated or wrong configured, reloading Packs from resources...");
-            saveResource("lang/de.yml", true);
-            saveResource("lang/en.yml", true);
-        }
-        langFile = new File(getDataFolder()+"/lang/"+ l + ".yml");
-        lang = YamlConfiguration.loadConfiguration(langFile);
     }
 
-    public static Main getInstance() {
-        return instance;
+    public static Screen createConfigScreen(Screen parent) {
+        return AutoConfig.getConfigScreen(ModConfig.class, parent).get();
+    }
+
+    public static TranslatableText t(String key, Object... args) {
+        return new TranslatableText(MOD_ID + "." + key, args);
     }
 }

@@ -11,7 +11,7 @@ authors = "Aiodane"
 description = '''
 View and configure your keybinds more conveniently.
 '''
-logoFile = "assets/icon.jpg"
+logoFile = "../assets/visual_keybinds/icon.jpg"
 
 [[dependencies.visual_keybinds]]
 modId = "forge"
