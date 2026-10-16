@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "visual_keybinds",
+  "version": "${version}",
+  "name": "Visual Keybinds",
+  "description": "",
+  "authors": ["Aiodane"],
+  "contact": {
+    "homepage": ""  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/visual_keybinds/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.aiodane.visual_keybinds.fabric.MainFabric"
+    ],
+    "client": [
+      "de.aiodane.visual_keybinds.fabric.client.MainFabricClient"
+    ]
+  },
+  "mixins": [
+    "visual_keybinds.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.0",
+    "minecraft": "~1.16.5",
+    "java": ">=8"
+    ,"architectury": ">=1.32.68"
+    ,"fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
