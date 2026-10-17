@@ -1,0 +1,10 @@
+{
+  "text.autoconfig.visual_keybinds.title": "Visual Keybinds Config",
+  "text.autoconfig.visual_keybinds.option.showConflictWarnings": "Highlight conflicts",
+  "text.autoconfig.visual_keybinds.option.showConflictWarnings.@Tooltip": "Colors buttons if there are multiple actions assigned to them.",
+  "text.autoconfig.visual_keybinds.option.conflictColor": "Conflict color",
+  "text.autoconfig.visual_keybinds.option.conflictColor.@Tooltip": "Use this to change the color of a key conflict",
+
+  "visual_keybinds.screen.title": "Visual Keybinds",
+  "visual_keybinds.button.open": "Keyboard-UI"
+}

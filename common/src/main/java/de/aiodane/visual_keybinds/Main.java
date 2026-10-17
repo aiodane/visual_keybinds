@@ -2,10 +2,15 @@ package de.aiodane.visual_keybinds;
 
 import de.aiodane.visual_keybinds.config.ModConfig;
 
+import de.aiodane.visual_keybinds.screen.KeyboardViewScreen;
+import me.shedaniel.architectury.event.events.GuiEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.options.ControlsOptionsScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.TranslatableText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +26,18 @@ public final class Main {
     public static void init() {
         configHolder = AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
         loadMainConfig();
+        GuiEvent.INIT_POST.register((screen, widgets, children) -> {
+            if (screen instanceof ControlsOptionsScreen) {
+                ButtonWidget visualUiBtn = new ButtonWidget(
+                        screen.width - 110, 10, 100, 20,
+                        Main.t("button.open"),
+                        btn -> MinecraftClient.getInstance().openScreen(new KeyboardViewScreen(screen))
+                );
+
+                widgets.add(visualUiBtn);
+                children.add(visualUiBtn);
+            }
+        });
         LOGGER.info("Visual Keybinds initialized successfully!");
     }
 

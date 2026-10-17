@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "visual_keybinds",
-  "version": "${version}",
+  "version": "${version}-fabric",
   "name": "Visual Keybinds",
   "description": "View and configure your keybinds more conveniently.",
   "authors": [

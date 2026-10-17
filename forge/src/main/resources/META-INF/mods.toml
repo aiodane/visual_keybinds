@@ -5,13 +5,13 @@ license = "ARR"
 
 [[mods]]
 modId = "visual_keybinds"
-version = "${version}"
+version = "${version}-forge"
 displayName = "Visual Keybinds"
 authors = "Aiodane"
 description = '''
 View and configure your keybinds more conveniently.
 '''
-logoFile = "../assets/visual_keybinds/icon.jpg"
+logoFile = "icon.jpg"
 
 [[dependencies.visual_keybinds]]
 modId = "forge"
