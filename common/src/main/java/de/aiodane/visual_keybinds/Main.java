@@ -9,7 +9,8 @@ import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.options.ControlsOptionsScreen;
+import net.minecraft.client.gui.screen.options.OptionsScreen;
+import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.TranslatableText;
 import org.apache.logging.log4j.LogManager;
@@ -27,15 +28,41 @@ public final class Main {
         configHolder = AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
         loadMainConfig();
         GuiEvent.INIT_POST.register((screen, widgets, children) -> {
-            if (screen instanceof ControlsOptionsScreen) {
-                ButtonWidget visualUiBtn = new ButtonWidget(
-                        screen.width - 110, 10, 100, 20,
-                        Main.t("button.open"),
-                        btn -> MinecraftClient.getInstance().openScreen(new KeyboardViewScreen(screen))
-                );
+            if (screen instanceof OptionsScreen) {
+                AbstractButtonWidget vanillaControlsBtn = null;
 
-                widgets.add(visualUiBtn);
-                children.add(visualUiBtn);
+                // search for ControlsOptionsButton
+                for (AbstractButtonWidget widget : widgets) {
+                    if (widget.getMessage() instanceof TranslatableText) {
+                        TranslatableText text = (TranslatableText) widget.getMessage();
+                        if ("options.controls".equals(text.getKey())) {
+                            vanillaControlsBtn = widget;
+                            break;
+                        }
+                    }
+                }
+
+                // Replace button if found
+                if (vanillaControlsBtn != null) {
+                    // remove original button
+                    widgets.remove(vanillaControlsBtn);
+                    children.remove(vanillaControlsBtn);
+
+                    // Replacing Vanilla Button
+                    ButtonWidget customControlsBtn = new ButtonWidget(
+                            vanillaControlsBtn.x,
+                            vanillaControlsBtn.y,
+                            vanillaControlsBtn.getWidth(),
+                            20,
+                            vanillaControlsBtn.getMessage(),
+
+                            // HIER definieren wir die Weiterleitung auf deinen Custom Screen:
+                            btn -> MinecraftClient.getInstance().openScreen(new KeyboardViewScreen(screen))
+                    );
+
+                    widgets.add(customControlsBtn);
+                    children.add(customControlsBtn);
+                }
             }
         });
         LOGGER.info("Visual Keybinds initialized successfully!");
