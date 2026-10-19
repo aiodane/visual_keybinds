@@ -18,7 +18,7 @@ public class ModConfig implements ConfigData {
     public KeyboardStandard activeKeyboardStandard = KeyboardStandard.ANSI;
 
     @ConfigEntry.Gui.Excluded
-    @Comment("Labeling and Language Layout of the keyboard. Must match a directory in %MINECRRAFT_INSTANCE%/config/visual_keybinds/layouts/")
+    @Comment("Labeling and Language Layout of the keyboard. Must match a directory in %MINECRAFT_INSTANCE%/config/visual_keybinds/layouts/")
     public String activeKeyboardLanguage = "en_us";
 
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
