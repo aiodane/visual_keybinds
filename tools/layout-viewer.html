@@ -25,6 +25,8 @@
   .key.mod:hover, .key.mod.sel { fill:#6d5bd0; stroke:#8b7cf0; }
   .key.nav { fill:#1f2d2a; stroke:#355248; }
   .key.nav:hover, .key.nav.sel { fill:#2f9e77; stroke:#4ade9e; }
+  .key.iso-enter { fill:#3a2e38; stroke:#5a4a58; }
+  .key.iso-enter:hover, .key.iso-enter.sel { fill:#7c5bd0; stroke:#9b7cf0; }
   #tip { position:fixed; pointer-events:none; background:#000d; border:1px solid #39424e; border-radius:6px;
          padding:6px 9px; font:12px ui-monospace, monospace; display:none; z-index:10; white-space:pre; }
   #bar { margin-top:10px; font:12px ui-monospace, monospace; color:#8fa0b3; min-height:1em; }
@@ -32,7 +34,7 @@
 </head>
 <body>
 <header>
-  <strong>Visual Keybinds - layout viewer</strong> <span class="ver">(v4, supports short & long key IDs)</span>
+  <strong>Visual Keybinds - layout viewer</strong> <span class="ver">(v5, ISO Enter fix)</span>
   <label class="file-btn">load layout JSON<input type="file" id="file" accept=".json,application/json" hidden></label>
   <span id="info">no file loaded - drop a layout JSON here (e.g. ansi_100.json) or use the button</span>
 </header>
@@ -97,7 +99,7 @@ const KEYMAP = {
   "key.keyboard.keypad.4": [324, "Num 4"], "key.keyboard.keypad.5": [325, "Num 5"],
   "key.keyboard.keypad.6": [326, "Num 6"], "key.keyboard.keypad.7": [327, "Num 7"],
   "key.keyboard.keypad.8": [328, "Num 8"], "key.keyboard.keypad.9": [329, "Num 9"],
-  "key.keyboard.world.1": [161, "<> (ISO)"],
+  "key.keyboard.world.1": [161, "<>"],
   "key.keyboard.international1": [135, "Intl1"], "key.keyboard.international2": [136, "Intl2"],
   "key.keyboard.international3": [137, "Intl3"], "key.keyboard.international4": [138, "Intl4"],
   "key.keyboard.international5": [139, "Intl5"],
@@ -198,10 +200,26 @@ function setInfo(t, isErr){
 
 // Determine if a key is an ISO-style Enter key based on its ID
 function isIsoEnterKey(id) {
-  // ISO/JIS layouts have L-shaped Enter, ANSI has rectangular
-  // Check for both long and short ID formats
   const normalizedId = id.replace('key.keyboard.', '');
   return normalizedId === 'ENTER' || normalizedId === 'key.keyboard.enter';
+}
+
+// Build the correct polygon for ISO Enter key (L-shaped, wider at top)
+// ISO Enter: top part is 2 units wide, bottom part is 1 unit wide
+function buildIsoEnterShape(x, y, w, h) {
+  // w = bottom width in pixels, h = total height in pixels
+  // top width = bottom width + U (1 unit wider at top)
+  const topWidth = w + U;
+  const midY = y + U; // middle Y coordinate (1 unit down from top)
+  
+  // Polygon points for L-shaped Enter key (wider at top):
+  // 1. Top-left
+  // 2. Top-right (wider)
+  // 3. Middle-right (where it steps in)
+  // 4. Bottom-right
+  // 5. Bottom-left
+  // 6. Middle-left (where it steps in)
+  return `${x},${y} ${x + topWidth},${y} ${x + topWidth},${midY} ${x + w},${midY} ${x + w},${y + h} ${x},${y + h}`;
 }
 
 function loadLayout(text, name) {
@@ -228,12 +246,14 @@ function render(L, name, warn) {
     const kw = k.uWidth || 1, kh = k.uHeight || 1;
     const x = PAD + k.uX * U, y = PAD + k.uY * U, w = kw * U - GAP, h = kh * U - GAP;
     const cls = NAV.test(k.id) ? 'nav' : MOD.test(k.id) ? 'mod' : '';
+    const isIso = k.isIsoEnter !== undefined ? k.isIsoEnter : isIsoEnterKey(k.id);
+    const isoCls = isIso ? 'iso-enter ' + cls : cls;
     let shape;
-    // Use explicit isIsoEnter if present, otherwise determine from ID
-    const useIsoEnter = k.isIsoEnter !== undefined ? k.isIsoEnter : isIsoEnterKey(k.id);
-    if (useIsoEnter) {
-      const x2 = x + w + GAP, y2 = y + U;
-      shape = `<polygon class="key ${cls}" points="${x},${y} ${x2},${y} ${x2},${y+h} ${x - 0.75*U},${y+h} ${x - 0.75*U},${y2} ${x},${y2}" data-id="${esc(k.id)}"/>`;
+    
+    if (isIso) {
+      // ISO Enter key: L-shaped, wider at top
+      const points = buildIsoEnterShape(x, y, w, h);
+      shape = `<polygon class="key ${isoCls}" points="${points}" data-id="${esc(k.id)}"/>`;
     } else {
       shape = `<rect class="key ${cls}" x="${x}" y="${y}" width="${w}" height="${h}" rx="4" data-id="${esc(k.id)}"/>`;
     }
