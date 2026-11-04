@@ -198,28 +198,28 @@ function setInfo(t, isErr){
   info.classList.toggle('err', !!isErr); 
 }
 
-// Determine if a key is an ISO-style Enter key based on its ID
-function isIsoEnterKey(id) {
-  const normalizedId = id.replace('key.keyboard.', '');
-  return normalizedId === 'ENTER' || normalizedId === 'key.keyboard.enter';
+// Determine if a key is an ISO-style Enter key:
+// either explicitly flagged, or the Enter key spanning two rows (ISO/JIS shape)
+function isIsoEnterKey(k) {
+  if (k.isIsoEnter !== undefined) return !!k.isIsoEnter;
+  return k.id === 'key.keyboard.enter' && (k.uHeight || 1) > 1.5;
 }
 
-// Build the correct polygon for ISO Enter key (L-shaped, wider at top)
-// ISO Enter: top part is 2 units wide, bottom part is 1 unit wide
+// Build the correct polygon for the ISO Enter key (L-shaped):
+// the bottom bar is uWidth wide and spans both rows (right-aligned),
+// the top bar is 0.25u wider and extends to the LEFT over the tab row
 function buildIsoEnterShape(x, y, w, h) {
-  // w = bottom width in pixels, h = total height in pixels
-  // top width = bottom width + U (1 unit wider at top)
-  const topWidth = w + U;
-  const midY = y + U; // middle Y coordinate (1 unit down from top)
-  
-  // Polygon points for L-shaped Enter key (wider at top):
-  // 1. Top-left
-  // 2. Top-right (wider)
+  const lip = 0.25 * U; // extra width of the top bar, extending left
+  const midY = y + U;   // bottom edge of the top (wider) bar
+
+  // Polygon points (L-shape, wide part top-left):
+  // 1. Top-left (extended to the left)
+  // 2. Top-right
   // 3. Middle-right (where it steps in)
   // 4. Bottom-right
   // 5. Bottom-left
   // 6. Middle-left (where it steps in)
-  return `${x},${y} ${x + topWidth},${y} ${x + topWidth},${midY} ${x + w},${midY} ${x + w},${y + h} ${x},${y + h}`;
+  return `${x - lip},${y} ${x + w},${y} ${x + w},${y + h} ${x},${y + h} ${x},${midY} ${x - lip},${midY}`;
 }
 
 function loadLayout(text, name) {
@@ -246,12 +246,12 @@ function render(L, name, warn) {
     const kw = k.uWidth || 1, kh = k.uHeight || 1;
     const x = PAD + k.uX * U, y = PAD + k.uY * U, w = kw * U - GAP, h = kh * U - GAP;
     const cls = NAV.test(k.id) ? 'nav' : MOD.test(k.id) ? 'mod' : '';
-    const isIso = k.isIsoEnter !== undefined ? k.isIsoEnter : isIsoEnterKey(k.id);
+    const isIso = isIsoEnterKey(k);
     const isoCls = isIso ? 'iso-enter ' + cls : cls;
     let shape;
     
     if (isIso) {
-      // ISO Enter key: L-shaped, wider at top
+      // ISO Enter key: L-shaped, wide part at the top-left
       const points = buildIsoEnterShape(x, y, w, h);
       shape = `<polygon class="key ${isoCls}" points="${points}" data-id="${esc(k.id)}"/>`;
     } else {

@@ -78,12 +78,12 @@ def layout_60(std):
 
 # ---------------------------------------------------------------- F row / nav / numpad
 def frow_tkl(y=0):
-    return row(y, 0, ["escape","f1","f2","f3","f4",("f5",1.0),("f6",1.0),("f7",1.0),("f8",1.0),
-                      "f9","f10","f11","f12"]) and \
-           row(y, 0, ["escape","f1","f2","f3","f4"]) + \
-           row(y, 5.5, ["f5","f6","f7","f8"]) + \
-           row(y, 10, ["f9","f10","f11","f12"]) + \
-           row(y, 14.5, ["print.screen","scroll.lock","pause"])
+    # Esc with 1u gap before F1; 0.5u gaps between the F-key groups (TKL/full-size)
+    return row(y, 0, ["escape"]) + \
+           row(y, 2, ["f1","f2","f3","f4"]) + \
+           row(y, 6.5, ["f5","f6","f7","f8"]) + \
+           row(y, 11, ["f9","f10","f11","f12"]) + \
+           row(y, 15.5, ["print.screen","scroll.lock","pause"])
 
 def nav_tkl(y):
     return row(y, 15.5, ["insert","home","page.up"])
@@ -121,36 +121,42 @@ def layout_100(std):
 
 # ---------------------------------------------------------------- 75
 def layout_75(std):
-    keys = row(0, 0, ["escape","f1","f2","f3","f4"]) + \
-           row(0, 5.5, ["f5","f6","f7","f8"]) + \
-           row(0, 10, ["f9","f10","f11","f12"]) + \
-           row(0, 14, ["delete"])
+    # QMK LAYOUT_75_ansi: 16u wide, contiguous F-row, right nav column at x15
+    keys = row(0, 0, ["escape","f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12",
+                      "print.screen","scroll.lock","delete"])
     if std == "ansi":
-        keys += row(1, 0, ["grave.accent"] + DIGITS + ["minus","equal",("backspace",1.0),"insert"])
+        keys += row(1, 0, ["grave.accent"] + DIGITS + ["minus","equal",("backspace",2.0)])
+        keys.append(key("home", 15, 1))
         keys += row(2, 0, [("tab",1.5)] + QWERTY + ["left.bracket","right.bracket",("backslash",1.5)])
-        keys += row(3, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe",("enter",1.0),("home",1.25)])
-        keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up"])
+        keys.append(key("page.up", 15, 2))
+        keys += row(3, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe",("enter",2.25)])
+        keys.append(key("page.down", 15, 3))
+        keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up","end"])
         keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
-                            ("right.alt",1.0),("menu",1.0),"left","down","right"])
+                            "right.alt","right.win","right.control","left","down","right"])
     else:
         grave_row = ["grave.accent"] + DIGITS + ["minus","equal"]
         if std == "iso":
-            keys += row(1, 0, grave_row + [("backspace",1.0),"insert"])
+            keys += row(1, 0, grave_row + [("backspace",2.0)])
+            keys.append(key("home", 15, 1))
             keys += row(2, 0, [("tab",1.5)] + QWERTY + ["left.bracket","right.bracket"])
             keys += row(3, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe","world.2"])
             keys.append(key("enter", 13.75, 2, 1.25, 2.0))
-            keys += row(4, 0, [("left.shift",1.25),"world.1"] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up"])
-            keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
-                                ("right.alt",1.0),("menu",1.0),"left","down","right"])
+            keys.append(key("page.up", 15, 2))
+            keys.append(key("page.down", 15, 3))
+            keys += row(4, 0, [("left.shift",1.25),"world.1"] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up","end"])
         else:  # jis
             keys += row(1, 0, grave_row + ["backslash",("backspace",1.0)])
+            keys.append(key("home", 15, 1))
             keys += row(2, 0, [("tab",1.5)] + QWERTY + ["left.bracket","right.bracket"])
             keys += row(3, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe","world.2"])
             keys.append(key("enter", 13.75, 2, 1.25, 2.0))
-            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up"])
-            keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
-                                ("right.alt",1.0),("menu",1.0),"left","down","right"])
-    return keys, 15.0
+            keys.append(key("page.up", 15, 2))
+            keys.append(key("page.down", 15, 3))
+            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up","end"])
+        keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
+                            "right.alt","right.win","right.control","left","down","right"])
+    return keys, 16.0
 
 # ---------------------------------------------------------------- build + validate
 def validate(name, keys, width):

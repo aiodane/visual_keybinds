@@ -1,5 +1,5 @@
 {
-  "totalWidthU": 15.0,
+  "totalWidthU": 16.0,
   "keys": [
     {
       "id": "key.keyboard.escape",
@@ -38,63 +38,77 @@
     },
     {
       "id": "key.keyboard.f5",
-      "uX": 5.5,
+      "uX": 5.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f6",
-      "uX": 6.5,
+      "uX": 6.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f7",
-      "uX": 7.5,
+      "uX": 7.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f8",
-      "uX": 8.5,
+      "uX": 8.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f9",
-      "uX": 10.0,
+      "uX": 9.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f10",
-      "uX": 11.0,
+      "uX": 10.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f11",
-      "uX": 12.0,
+      "uX": 11.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.f12",
+      "uX": 12.0,
+      "uY": 0.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.print.screen",
       "uX": 13.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.delete",
+      "id": "key.keyboard.scroll.lock",
       "uX": 14.0,
+      "uY": 0.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.delete",
+      "uX": 15.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
@@ -194,12 +208,12 @@
       "id": "key.keyboard.backspace",
       "uX": 13.0,
       "uY": 1.0,
-      "uWidth": 1.0,
+      "uWidth": 2.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.insert",
-      "uX": 14.0,
+      "id": "key.keyboard.home",
+      "uX": 15.0,
       "uY": 1.0,
       "uWidth": 1.0,
       "uHeight": 1.0
@@ -394,6 +408,20 @@
       "uHeight": 2.0
     },
     {
+      "id": "key.keyboard.page.up",
+      "uX": 15.0,
+      "uY": 2.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.page.down",
+      "uX": 15.0,
+      "uY": 3.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
       "id": "key.keyboard.left.shift",
       "uX": 0.0,
       "uY": 4.0,
@@ -492,6 +520,13 @@
       "uHeight": 1.0
     },
     {
+      "id": "key.keyboard.end",
+      "uX": 15.0,
+      "uY": 4.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
       "id": "key.keyboard.left.control",
       "uX": 0.0,
       "uY": 5.0,
@@ -527,29 +562,36 @@
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.menu",
+      "id": "key.keyboard.right.win",
       "uX": 11.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.left",
+      "id": "key.keyboard.right.control",
       "uX": 12.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.down",
+      "id": "key.keyboard.left",
       "uX": 13.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.right",
+      "id": "key.keyboard.down",
       "uX": 14.0,
+      "uY": 5.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.right",
+      "uX": 15.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0

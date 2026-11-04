@@ -10,105 +10,105 @@
     },
     {
       "id": "key.keyboard.f1",
-      "uX": 1.0,
-      "uY": 0.0,
-      "uWidth": 1.0,
-      "uHeight": 1.0
-    },
-    {
-      "id": "key.keyboard.f2",
       "uX": 2.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f3",
+      "id": "key.keyboard.f2",
       "uX": 3.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f4",
+      "id": "key.keyboard.f3",
       "uX": 4.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f5",
-      "uX": 5.5,
+      "id": "key.keyboard.f4",
+      "uX": 5.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f6",
+      "id": "key.keyboard.f5",
       "uX": 6.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f7",
+      "id": "key.keyboard.f6",
       "uX": 7.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f8",
+      "id": "key.keyboard.f7",
       "uX": 8.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f9",
-      "uX": 10.0,
+      "id": "key.keyboard.f8",
+      "uX": 9.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f10",
+      "id": "key.keyboard.f9",
       "uX": 11.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f11",
+      "id": "key.keyboard.f10",
       "uX": 12.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.f12",
+      "id": "key.keyboard.f11",
       "uX": 13.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.print.screen",
-      "uX": 14.5,
+      "id": "key.keyboard.f12",
+      "uX": 14.0,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.scroll.lock",
+      "id": "key.keyboard.print.screen",
       "uX": 15.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.pause",
+      "id": "key.keyboard.scroll.lock",
       "uX": 16.5,
+      "uY": 0.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.pause",
+      "uX": 17.5,
       "uY": 0.0,
       "uWidth": 1.0,
       "uHeight": 1.0
