@@ -12,7 +12,7 @@
   #info { color:#8fa0b3; font-size:12px; }
   #kb { overflow-x:auto; padding:8px; background:#0e1114; border:1px solid #262d36; border-radius:8px; display:inline-block; }
   svg text { fill:#c9d4e0; font:11px ui-monospace, monospace; pointer-events:none; }
-  .key { fill:#232b34; stroke:#3d4754; rx:4; cursor:pointer; }
+  .key { fill:#2e3947; stroke:#55627a; rx:4; cursor:pointer; }
   .key:hover, .key.sel { fill:#3b82f6; stroke:#60a5fa; }
   .key:hover text, .key.sel text { fill:#fff; }
   .key.mod { fill:#2c2a3a; stroke:#4a4460; }
@@ -26,7 +26,7 @@
 </head>
 <body>
 <header>
-  <strong>Visual Keybinds - physical layout viewer</strong>
+  <strong>Visual Keybinds - physical layout viewer</strong> <span style="color:#8fa0b3;font-size:12px">(v2, fa75df2)</span>
   <label>standard <select id="std"></select></label>
   <label>size <select id="size"></select></label>
   <label>load custom JSON <input type="file" id="file" accept=".json,application/json"></label>
@@ -83,7 +83,8 @@ function render() {
     s += shape + `<text x="${x + w/2}" y="${y + h/2 + fs/3}" text-anchor="middle" font-size="${fs}">${esc(labelOf(k.id))}</text>`;
   }
   kb.innerHTML = s + '</svg>';
-  document.getElementById('info').textContent = `${name}: ${L.keys.length} keys, ${L.totalWidthU}u wide`;
+  const painted = kb.querySelectorAll('.key').length;
+  document.getElementById('info').textContent = `${name}: ${L.keys.length} keys, ${L.totalWidthU}u wide - painted ${painted}/${L.keys.length}`;
   bar.textContent = '';
   kb.querySelectorAll('.key').forEach(el => {
     el.addEventListener('mousemove', e => {
