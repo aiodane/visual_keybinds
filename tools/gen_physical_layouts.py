@@ -59,15 +59,16 @@ def iso_rows(y0, esc=False, grave=True):
 # ---------------------------------------------------------------- JIS block
 def jis_rows(y0, esc=False, grave=True):
     r = []
-    r0 = ([("escape",1.0)] if esc else []) + ([("grave.accent",1.0)] if grave else []) + DIGITS + ["minus","equal","backslash"]
+    r0 = ([("escape",1.0)] if esc else []) + ([("grave.accent",1.0)] if grave else []) + DIGITS + ["minus","equal","world.1"]
     r += row(y0, 0, r0 + [("backspace",1.0)])
     r += row(y0+1, 0, [("tab",1.5)] + QWERTY + ["left.bracket","right.bracket"])
     # JIS enter spans tab row + home row; extra JIS key (]) next to apostrophe-slot key
     r += row(y0+2, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe","world.2"])
     r.append(key("enter", 13.75, y0+1, 1.25, 2.0))
-    r += row(y0+3, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",2.75)])
-    r += row(y0+4, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),"world.1",("space",6.25),
-                        ("right.alt",1.25),("menu",1.25),("right.control",1.25)], w=1.25)
+    # JIS "ro" key (backslash/underscore, scancode 0x73) between slash and right shift
+    r += row(y0+3, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash","backslash",("right.shift",1.75)])
+    r += row(y0+4, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
+                        ("right.alt",1.25),("right.win",1.25),("menu",1.25),("right.control",1.25)], w=1.25)
     return r
 
 # ---------------------------------------------------------------- 60 percent
@@ -146,14 +147,15 @@ def layout_75(std):
             keys.append(key("page.down", 15, 3))
             keys += row(4, 0, [("left.shift",1.25),"world.1"] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up","end"])
         else:  # jis
-            keys += row(1, 0, grave_row + ["backslash",("backspace",1.0)])
+            keys += row(1, 0, grave_row + ["world.1",("backspace",1.0)])
             keys.append(key("home", 15, 1))
             keys += row(2, 0, [("tab",1.5)] + QWERTY + ["left.bracket","right.bracket"])
             keys += row(3, 0, [("caps.lock",1.75)] + ASDF + ["semicolon","apostrophe","world.2"])
             keys.append(key("enter", 13.75, 2, 1.25, 2.0))
             keys.append(key("page.up", 15, 2))
             keys.append(key("page.down", 15, 3))
-            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash",("right.shift",1.75),"up","end"])
+            # ro key (backslash/underscore) between slash and right shift, right shift shrunk to 1.75u
+            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash","backslash",("right.shift",1.75),"up"])
         keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
                             "right.alt","right.win","right.control","left","down","right"])
     return keys, 16.0

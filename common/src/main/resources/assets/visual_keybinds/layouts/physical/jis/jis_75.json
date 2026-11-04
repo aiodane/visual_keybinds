@@ -205,7 +205,7 @@
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.backslash",
+      "id": "key.keyboard.world.1",
       "uX": 13.0,
       "uY": 1.0,
       "uWidth": 1.0,
@@ -506,21 +506,21 @@
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.right.shift",
+      "id": "key.keyboard.backslash",
       "uX": 12.25,
+      "uY": 4.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.right.shift",
+      "uX": 13.25,
       "uY": 4.0,
       "uWidth": 1.75,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.up",
-      "uX": 14.0,
-      "uY": 4.0,
-      "uWidth": 1.0,
-      "uHeight": 1.0
-    },
-    {
-      "id": "key.keyboard.end",
       "uX": 15.0,
       "uY": 4.0,
       "uWidth": 1.0,
