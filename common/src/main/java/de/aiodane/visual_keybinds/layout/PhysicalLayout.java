@@ -23,7 +23,6 @@ public class PhysicalLayout {
     public static class PhysicalKey {
         public String id;
         public float uX, uY, uWidth = 1.0f, uHeight = 1.0f;
-        public boolean isIsoEnter = false;
     }
 
     public static PhysicalLayout load(KeyboardStandard standard, KeyboardSize size) {

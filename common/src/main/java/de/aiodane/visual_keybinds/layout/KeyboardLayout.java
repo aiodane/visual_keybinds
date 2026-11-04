@@ -16,6 +16,14 @@ public class KeyboardLayout {
     }
 
     /**
+     * Determines if the Enter key should be rendered as ISO-style (L-shaped).
+     * ISO and JIS layouts have L-shaped Enter keys, ANSI has rectangular Enter.
+     */
+    private static boolean isIsoEnterKey(KeyboardStandard standard, String keyId) {
+        return (standard == KeyboardStandard.ISO || standard == KeyboardStandard.JIS) && "key.keyboard.enter".equals(keyId);
+    }
+
+    /**
      * Merges physical and virtual layouts into a single renderable keyboard.
      */
     public static KeyboardLayout build(KeyboardStandard standard, KeyboardSize size, String virtualLanguageId) {
@@ -25,12 +33,12 @@ public class KeyboardLayout {
         KeyboardLayout layout = new KeyboardLayout(physical.totalWidthU);
 
         for (PhysicalLayout.PhysicalKey pKey : physical.keys) {
-            // Get the virtual key mapping, or use a fallback if the ID is missing in the config
             VirtualLayout.VirtualKey vKey = virtual.mappings.getOrDefault(pKey.id, new VirtualLayout.VirtualKey(0, ""));
 
             layout.keys.add(new RenderKey(
                     pKey.id,
-                    pKey.uX, pKey.uY, pKey.uWidth, pKey.uHeight, pKey.isIsoEnter,
+                    pKey.uX, pKey.uY, pKey.uWidth, pKey.uHeight,
+                    isIsoEnterKey(standard, pKey.id),
                     vKey.keyCode,
                     vKey.label
             ));

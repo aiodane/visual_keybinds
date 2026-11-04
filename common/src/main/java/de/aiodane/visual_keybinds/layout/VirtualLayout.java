@@ -14,7 +14,7 @@ import java.util.Map;
 public class VirtualLayout {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    // Maps the PhysicalKey ID (e.g., "K1") to its virtual assignment
+    // Maps the PhysicalKey ID (e.g., "key.keyboard.a") to its virtual assignment
     public Map<String, VirtualKey> mappings = new HashMap<>();
 
     public static class VirtualKey {
@@ -38,7 +38,7 @@ public class VirtualLayout {
         if (!file.exists()) {
             Main.LOGGER.warn("Virtual layout {} not found. Generating dummy template...", file.getAbsolutePath());
             VirtualLayout template = new VirtualLayout();
-            template.mappings.put("K_EXAMPLE", new VirtualKey(0, "?"));
+            template.mappings.put("key.keyboard.example", new VirtualKey(0, "?"));
 
             try (FileWriter writer = new FileWriter(file)) {
                 GSON.toJson(template, writer);
