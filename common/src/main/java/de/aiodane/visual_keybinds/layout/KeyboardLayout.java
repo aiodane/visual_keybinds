@@ -20,7 +20,7 @@ public class KeyboardLayout {
      * ISO and JIS layouts have L-shaped Enter keys, ANSI has rectangular Enter.
      */
     private static boolean isIsoEnterKey(KeyboardStandard standard, String keyId) {
-        return (standard == KeyboardStandard.ISO || standard == KeyboardStandard.JIS) && "ENTER".equals(keyId);
+        return (standard == KeyboardStandard.ISO || standard == KeyboardStandard.JIS) && "key.keyboard.enter".equals(keyId);
     }
 
     /**
