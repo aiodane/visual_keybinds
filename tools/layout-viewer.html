@@ -32,7 +32,7 @@
 </head>
 <body>
 <header>
-  <strong>Visual Keybinds - layout viewer</strong> <span class="ver">(v3, upload-only)</span>
+  <strong>Visual Keybinds - layout viewer</strong> <span class="ver">(v4, supports short & long key IDs)</span>
   <label class="file-btn">load layout JSON<input type="file" id="file" accept=".json,application/json" hidden></label>
   <span id="info">no file loaded - drop a layout JSON here (e.g. ansi_100.json) or use the button</span>
 </header>
@@ -41,18 +41,168 @@
 <div id="bar"></div>
 <div id="tip"></div>
 <script>
-const KEYMAP = {"key.keyboard.escape": [256, "Esc"], "key.keyboard.f1": [290, "F1"], "key.keyboard.f2": [291, "F2"], "key.keyboard.f3": [292, "F3"], "key.keyboard.f4": [293, "F4"], "key.keyboard.f5": [294, "F5"], "key.keyboard.f6": [295, "F6"], "key.keyboard.f7": [296, "F7"], "key.keyboard.f8": [297, "F8"], "key.keyboard.f9": [298, "F9"], "key.keyboard.f10": [299, "F10"], "key.keyboard.f11": [300, "F11"], "key.keyboard.f12": [301, "F12"], "key.keyboard.grave.accent": [96, "`"], "key.keyboard.1": [49, "1"], "key.keyboard.2": [50, "2"], "key.keyboard.3": [51, "3"], "key.keyboard.4": [52, "4"], "key.keyboard.5": [53, "5"], "key.keyboard.6": [54, "6"], "key.keyboard.7": [55, "7"], "key.keyboard.8": [56, "8"], "key.keyboard.9": [57, "9"], "key.keyboard.0": [48, "0"], "key.keyboard.minus": [45, "-"], "key.keyboard.equal": [61, "="], "key.keyboard.backspace": [259, "Backspace"], "key.keyboard.tab": [258, "Tab"], "key.keyboard.a": [65, "A"], "key.keyboard.b": [66, "B"], "key.keyboard.c": [67, "C"], "key.keyboard.d": [68, "D"], "key.keyboard.e": [69, "E"], "key.keyboard.f": [70, "F"], "key.keyboard.g": [71, "G"], "key.keyboard.h": [72, "H"], "key.keyboard.i": [73, "I"], "key.keyboard.j": [74, "J"], "key.keyboard.k": [75, "K"], "key.keyboard.l": [76, "L"], "key.keyboard.m": [77, "M"], "key.keyboard.n": [78, "N"], "key.keyboard.o": [79, "O"], "key.keyboard.p": [80, "P"], "key.keyboard.q": [81, "Q"], "key.keyboard.r": [82, "R"], "key.keyboard.s": [83, "S"], "key.keyboard.t": [84, "T"], "key.keyboard.u": [85, "U"], "key.keyboard.v": [86, "V"], "key.keyboard.w": [87, "W"], "key.keyboard.x": [88, "X"], "key.keyboard.y": [89, "Y"], "key.keyboard.z": [90, "Z"], "key.keyboard.left.bracket": [91, "["], "key.keyboard.right.bracket": [93, "]"], "key.keyboard.backslash": [92, "\\"], "key.keyboard.caps.lock": [280, "Caps Lock"], "key.keyboard.semicolon": [59, ";"], "key.keyboard.apostrophe": [39, "'"], "key.keyboard.enter": [257, "Enter"], "key.keyboard.left.shift": [340, "L Shift"], "key.keyboard.comma": [44, ","], "key.keyboard.period": [46, "."], "key.keyboard.slash": [47, "/"], "key.keyboard.right.shift": [344, "R Shift"], "key.keyboard.left.control": [341, "L Ctrl"], "key.keyboard.left.win": [343, "L Win"], "key.keyboard.left.alt": [342, "L Alt"], "key.keyboard.space": [32, "Space"], "key.keyboard.right.alt": [346, "R Alt"], "key.keyboard.right.win": [347, "R Win"], "key.keyboard.menu": [348, "Menu"], "key.keyboard.right.control": [345, "R Ctrl"], "key.keyboard.print.screen": [283, "PrtSc"], "key.keyboard.scroll.lock": [281, "ScrLk"], "key.keyboard.pause": [284, "Pause"], "key.keyboard.insert": [260, "Ins"], "key.keyboard.home": [268, "Home"], "key.keyboard.page.up": [266, "PgUp"], "key.keyboard.delete": [261, "Del"], "key.keyboard.end": [269, "End"], "key.keyboard.page.down": [267, "PgDn"], "key.keyboard.up": [265, "Up"], "key.keyboard.left": [263, "Left"], "key.keyboard.down": [264, "Down"], "key.keyboard.right": [262, "Right"], "key.keyboard.num.lock": [282, "NumLk"], "key.keyboard.keypad.divide": [331, "Num /"], "key.keyboard.keypad.multiply": [332, "Num *"], "key.keyboard.keypad.subtract": [333, "Num -"], "key.keyboard.keypad.add": [334, "Num +"], "key.keyboard.keypad.enter": [335, "Num Enter"], "key.keyboard.keypad.decimal": [330, "Num ."], "key.keyboard.keypad.0": [320, "Num 0"], "key.keyboard.keypad.1": [321, "Num 1"], "key.keyboard.keypad.2": [322, "Num 2"], "key.keyboard.keypad.3": [323, "Num 3"], "key.keyboard.keypad.4": [324, "Num 4"], "key.keyboard.keypad.5": [325, "Num 5"], "key.keyboard.keypad.6": [326, "Num 6"], "key.keyboard.keypad.7": [327, "Num 7"], "key.keyboard.keypad.8": [328, "Num 8"], "key.keyboard.keypad.9": [329, "Num 9"], "key.keyboard.world.1": [161, "<> (ISO)"], "key.keyboard.international1": [135, "Intl1 (ro)"], "key.keyboard.international2": [136, "Intl2 (kana)"], "key.keyboard.international3": [137, "Intl3 (yen)"], "key.keyboard.international4": [138, "Intl4 (henkan)"], "key.keyboard.international5": [139, "Intl5 (muhenkan)"]};
+// GLFW key codes and display labels
+const KEYMAP = {
+  // Prefixed IDs (key.keyboard.*)
+  "key.keyboard.escape": [256, "Esc"],
+  "key.keyboard.f1": [290, "F1"], "key.keyboard.f2": [291, "F2"], "key.keyboard.f3": [292, "F3"],
+  "key.keyboard.f4": [293, "F4"], "key.keyboard.f5": [294, "F5"], "key.keyboard.f6": [295, "F6"],
+  "key.keyboard.f7": [296, "F7"], "key.keyboard.f8": [297, "F8"], "key.keyboard.f9": [298, "F9"],
+  "key.keyboard.f10": [299, "F10"], "key.keyboard.f11": [300, "F11"], "key.keyboard.f12": [301, "F12"],
+  "key.keyboard.grave.accent": [96, "`"],
+  "key.keyboard.1": [49, "1"], "key.keyboard.2": [50, "2"], "key.keyboard.3": [51, "3"],
+  "key.keyboard.4": [52, "4"], "key.keyboard.5": [53, "5"], "key.keyboard.6": [54, "6"],
+  "key.keyboard.7": [55, "7"], "key.keyboard.8": [56, "8"], "key.keyboard.9": [57, "9"],
+  "key.keyboard.0": [48, "0"],
+  "key.keyboard.minus": [45, "-"], "key.keyboard.equal": [61, "="],
+  "key.keyboard.backspace": [259, "Backspace"],
+  "key.keyboard.tab": [258, "Tab"],
+  "key.keyboard.q": [81, "Q"], "key.keyboard.w": [87, "W"], "key.keyboard.e": [69, "E"],
+  "key.keyboard.r": [82, "R"], "key.keyboard.t": [84, "T"], "key.keyboard.y": [89, "Y"],
+  "key.keyboard.u": [85, "U"], "key.keyboard.i": [73, "I"], "key.keyboard.o": [79, "O"],
+  "key.keyboard.p": [80, "P"],
+  "key.keyboard.a": [65, "A"], "key.keyboard.s": [83, "S"], "key.keyboard.d": [68, "D"],
+  "key.keyboard.f": [70, "F"], "key.keyboard.g": [71, "G"], "key.keyboard.h": [72, "H"],
+  "key.keyboard.j": [74, "J"], "key.keyboard.k": [75, "K"], "key.keyboard.l": [76, "L"],
+  "key.keyboard.z": [90, "Z"], "key.keyboard.x": [88, "X"], "key.keyboard.c": [67, "C"],
+  "key.keyboard.v": [86, "V"], "key.keyboard.b": [66, "B"], "key.keyboard.n": [78, "N"],
+  "key.keyboard.m": [77, "M"],
+  "key.keyboard.left.bracket": [91, "["], "key.keyboard.right.bracket": [93, "]"],
+  "key.keyboard.backslash": [92, "\\"], "key.keyboard.backslash_iso": [92, "\\"],
+  "key.keyboard.caps.lock": [280, "Caps Lock"],
+  "key.keyboard.semicolon": [59, ";"], "key.keyboard.apostrophe": [39, "'"],
+  "key.keyboard.enter": [257, "Enter"],
+  "key.keyboard.left.shift": [340, "L Shift"],
+  "key.keyboard.comma": [44, ","], "key.keyboard.period": [46, "."],
+  "key.keyboard.slash": [47, "/"],
+  "key.keyboard.right.shift": [344, "R Shift"],
+  "key.keyboard.left.control": [341, "L Ctrl"], "key.keyboard.left.win": [343, "L Win"],
+  "key.keyboard.left.alt": [342, "L Alt"],
+  "key.keyboard.space": [32, "Space"],
+  "key.keyboard.right.alt": [346, "R Alt"], "key.keyboard.right.win": [347, "R Win"],
+  "key.keyboard.menu": [348, "Menu"], "key.keyboard.right.control": [345, "R Ctrl"],
+  "key.keyboard.print.screen": [283, "PrtSc"], "key.keyboard.scroll.lock": [281, "ScrLk"],
+  "key.keyboard.pause": [284, "Pause"],
+  "key.keyboard.insert": [260, "Ins"], "key.keyboard.home": [268, "Home"],
+  "key.keyboard.page.up": [266, "PgUp"], "key.keyboard.delete": [261, "Del"],
+  "key.keyboard.end": [269, "End"], "key.keyboard.page.down": [267, "PgDn"],
+  "key.keyboard.up": [265, "Up"], "key.keyboard.left": [263, "Left"],
+  "key.keyboard.down": [264, "Down"], "key.keyboard.right": [262, "Right"],
+  "key.keyboard.num.lock": [282, "NumLk"],
+  "key.keyboard.keypad.divide": [331, "Num /"], "key.keyboard.keypad.multiply": [332, "Num *"],
+  "key.keyboard.keypad.subtract": [333, "Num -"], "key.keyboard.keypad.add": [334, "Num +"],
+  "key.keyboard.keypad.enter": [335, "Num Enter"], "key.keyboard.keypad.decimal": [330, "Num ."],
+  "key.keyboard.keypad.0": [320, "Num 0"], "key.keyboard.keypad.1": [321, "Num 1"],
+  "key.keyboard.keypad.2": [322, "Num 2"], "key.keyboard.keypad.3": [323, "Num 3"],
+  "key.keyboard.keypad.4": [324, "Num 4"], "key.keyboard.keypad.5": [325, "Num 5"],
+  "key.keyboard.keypad.6": [326, "Num 6"], "key.keyboard.keypad.7": [327, "Num 7"],
+  "key.keyboard.keypad.8": [328, "Num 8"], "key.keyboard.keypad.9": [329, "Num 9"],
+  "key.keyboard.world.1": [161, "<> (ISO)"],
+  "key.keyboard.international1": [135, "Intl1"], "key.keyboard.international2": [136, "Intl2"],
+  "key.keyboard.international3": [137, "Intl3"], "key.keyboard.international4": [138, "Intl4"],
+  "key.keyboard.international5": [139, "Intl5"],
+  // Short IDs (without prefix)
+  "ESC": [256, "Esc"],
+  "F1": [290, "F1"], "F2": [291, "F2"], "F3": [292, "F3"],
+  "F4": [293, "F4"], "F5": [294, "F5"], "F6": [295, "F6"],
+  "F7": [296, "F7"], "F8": [297, "F8"], "F9": [298, "F9"],
+  "F10": [299, "F10"], "F11": [300, "F11"], "F12": [301, "F12"],
+  "TILDE": [96, "`"], "GRAVE": [96, "`"],
+  "K1": [49, "1"], "K2": [50, "2"], "K3": [51, "3"],
+  "K4": [52, "4"], "K5": [53, "5"], "K6": [54, "6"],
+  "K7": [55, "7"], "K8": [56, "8"], "K9": [57, "9"],
+  "K0": [48, "0"],
+  "MINUS": [45, "-"], "EQUALS": [61, "="],
+  "BACKSPACE": [259, "Backspace"],
+  "TAB": [258, "Tab"],
+  "Q": [81, "Q"], "W": [87, "W"], "E": [69, "E"],
+  "R": [82, "R"], "T": [84, "T"], "Y": [89, "Y"],
+  "U": [85, "U"], "I": [73, "I"], "O": [79, "O"],
+  "P": [80, "P"],
+  "A": [65, "A"], "S": [83, "S"], "D": [68, "D"],
+  "F": [70, "F"], "G": [71, "G"], "H": [72, "H"],
+  "J": [74, "J"], "K": [75, "K"], "L": [76, "L"],
+  "Z": [90, "Z"], "X": [88, "X"], "C": [67, "C"],
+  "V": [86, "V"], "B": [66, "B"], "N": [78, "N"],
+  "M": [77, "M"],
+  "LBRACKET": [91, "["], "RBRACKET": [93, "]"],
+  "BACKSLASH": [92, "\\"], "BACKSLASH_ISO": [92, "\\"],
+  "CAPS_LK": [280, "Caps Lock"], "CAPS_LOCK": [280, "Caps Lock"],
+  "SEMICOLON": [59, ";"], "APOSTROPHE": [39, "'"],
+  "ENTER": [257, "Enter"],
+  "L_SHIFT": [340, "L Shift"], "LEFT_SHIFT": [340, "L Shift"],
+  "COMMA": [44, ","], "PERIOD": [46, "."],
+  "SLASH": [47, "/"],
+  "R_SHIFT": [344, "R Shift"], "RIGHT_SHIFT": [344, "R Shift"],
+  "L_CTRL": [341, "L Ctrl"], "LEFT_CONTROL": [341, "L Ctrl"],
+  "L_WIN": [343, "L Win"], "LEFT_WIN": [343, "L Win"],
+  "L_ALT": [342, "L Alt"], "LEFT_ALT": [342, "L Alt"],
+  "SPACE": [32, "Space"],
+  "R_ALT": [346, "R Alt"], "RIGHT_ALT": [346, "R Alt"],
+  "R_WIN": [347, "R Win"], "RIGHT_WIN": [347, "R Win"],
+  "MENU": [348, "Menu"],
+  "R_CTRL": [345, "R Ctrl"], "RIGHT_CONTROL": [345, "R Ctrl"],
+  "PRT_SCR": [283, "PrtSc"], "PRINT_SCREEN": [283, "PrtSc"],
+  "SCRL_LK": [281, "ScrLk"], "SCROLL_LOCK": [281, "ScrLk"],
+  "PAUSE": [284, "Pause"],
+  "INSERT": [260, "Ins"], "INS": [260, "Ins"],
+  "HOME": [268, "Home"],
+  "PG_UP": [266, "PgUp"], "PAGE_UP": [266, "PgUp"],
+  "DELETE": [261, "Del"], "DEL": [261, "Del"],
+  "END": [269, "End"],
+  "PG_DN": [267, "PgDn"], "PAGE_DOWN": [267, "PgDn"],
+  "UP": [265, "Up"], "DOWN": [264, "Down"], "LEFT": [263, "Left"], "RIGHT": [262, "Right"],
+  "NUM_LK": [282, "NumLk"], "NUM_LOCK": [282, "NumLk"],
+  "DIVIDE": [331, "Num /"], "NUM_DIVIDE": [331, "Num /"],
+  "MULTIPLY": [332, "Num *"], "NUM_MULTIPLY": [332, "Num *"],
+  "NUM_MINUS": [333, "Num -"], "NUM_SUBTRACT": [333, "Num -"],
+  "NUM_PLUS": [334, "Num +"], "NUM_ADD": [334, "Num +"],
+  "NUM_ENTER": [335, "Num Enter"], "KEYPAD_ENTER": [335, "Num Enter"],
+  "NUM_PERIOD": [330, "Num ."], "NUM_DECIMAL": [330, "Num ."],
+  "NUM_0": [320, "Num 0"], "NUM_1": [321, "Num 1"],
+  "NUM_2": [322, "Num 2"], "NUM_3": [323, "Num 3"],
+  "NUM_4": [324, "Num 4"], "NUM_5": [325, "Num 5"],
+  "NUM_6": [326, "Num 6"], "NUM_7": [327, "Num 7"],
+  "NUM_8": [328, "Num 8"], "NUM_9": [329, "Num 9"],
+  // Special keys
+  "LESS_GREATER": [161, "<>"],
+  "AT": [64, "@"],
+  "COLON": [58, ":"],
+  "UNDERSCORE": [95, "_"],
+  "MUHENKAN": [138, "無変換"],
+  "HENKAN": [139, "変換"],
+  "HIRAGANA": [140, "ひらがな"]
+};
 const U = 46, GAP = 5, PAD = 10;
-const MOD = /shift|control|alt|win|menu|space|enter|backspace|tab|caps|escape|^key\.keyboard\.f\d|print|scroll|pause/;
-const NAV = /insert|home|page|delete|end|arrow|^key\.keyboard\.(up|down|left|right)$|num\.|keypad/;
+
+// Regex patterns for categorizing keys
+const MOD = /shift|control|alt|win|menu|space|enter|backspace|tab|caps|escape|^key\.keyboard\.f\d|print|scroll|pause|_LK|_CTRL|_ALT|_WIN/i;
+const NAV = /insert|home|page|delete|end|arrow|^key\.keyboard\.(up|down|left|right)$|num\.|keypad|NUM_/i;
 
 const info = document.getElementById('info'), bar = document.getElementById('bar'),
       tip = document.getElementById('tip'), kb = document.getElementById('kb');
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
-function labelOf(id){ const m = KEYMAP[id]; return m ? m[1] : String(id).replace('key.keyboard.',''); }
-function codeOf(id){ const m = KEYMAP[id]; return m ? m[0] : '?'; }
-function setInfo(t, isErr){ info.textContent = t; info.classList.toggle('err', !!isErr); }
+function labelOf(id){ 
+  const m = KEYMAP[id]; 
+  return m ? m[1] : String(id).replace('key.keyboard.', ''); 
+}
+function codeOf(id){ 
+  const m = KEYMAP[id]; 
+  return m ? m[0] : '?';
+}
+function setInfo(t, isErr){ 
+  info.textContent = t; 
+  info.classList.toggle('err', !!isErr); 
+}
+
+// Determine if a key is an ISO-style Enter key based on its ID
+function isIsoEnterKey(id) {
+  // ISO/JIS layouts have L-shaped Enter, ANSI has rectangular
+  // Check for both long and short ID formats
+  const normalizedId = id.replace('key.keyboard.', '');
+  return normalizedId === 'ENTER' || normalizedId === 'key.keyboard.enter';
+}
 
 function loadLayout(text, name) {
   let L;
@@ -79,7 +229,9 @@ function render(L, name, warn) {
     const x = PAD + k.uX * U, y = PAD + k.uY * U, w = kw * U - GAP, h = kh * U - GAP;
     const cls = NAV.test(k.id) ? 'nav' : MOD.test(k.id) ? 'mod' : '';
     let shape;
-    if (k.isIsoEnter) {
+    // Use explicit isIsoEnter if present, otherwise determine from ID
+    const useIsoEnter = k.isIsoEnter !== undefined ? k.isIsoEnter : isIsoEnterKey(k.id);
+    if (useIsoEnter) {
       const x2 = x + w + GAP, y2 = y + U;
       shape = `<polygon class="key ${cls}" points="${x},${y} ${x2},${y} ${x2},${y+h} ${x - 0.75*U},${y+h} ${x - 0.75*U},${y2} ${x},${y2}" data-id="${esc(k.id)}"/>`;
     } else {
