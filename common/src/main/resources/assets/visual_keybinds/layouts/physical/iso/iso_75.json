@@ -1,0 +1,441 @@
+{
+  "totalWidthU": 18.5,
+  "keys": [
+    {
+      "id": "key.keyboard.escape",
+      "uX": 0,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f1",
+      "uX": 2,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f2",
+      "uX": 3,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f3",
+      "uX": 4,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f4",
+      "uX": 5,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f5",
+      "uX": 6.5,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f6",
+      "uX": 7.5,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f7",
+      "uX": 8.5,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f8",
+      "uX": 9.5,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f9",
+      "uX": 11,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f10",
+      "uX": 12,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f11",
+      "uX": 13,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.f12",
+      "uX": 14,
+      "uY": 0
+    },
+    {
+      "id": "key.keyboard.grave.accent",
+      "uX": 0,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.1",
+      "uX": 1,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.2",
+      "uX": 2,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.3",
+      "uX": 3,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.4",
+      "uX": 4,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.5",
+      "uX": 5,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.6",
+      "uX": 6,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.7",
+      "uX": 7,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.8",
+      "uX": 8,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.9",
+      "uX": 9,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.0",
+      "uX": 10,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.minus",
+      "uX": 11,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.equal",
+      "uX": 12,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.backspace",
+      "uX": 13,
+      "uY": 1,
+      "uWidth": 2.0
+    },
+    {
+      "id": "key.keyboard.tab",
+      "uX": 0,
+      "uY": 2,
+      "uWidth": 1.5
+    },
+    {
+      "id": "key.keyboard.q",
+      "uX": 1.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.w",
+      "uX": 2.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.e",
+      "uX": 3.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.r",
+      "uX": 4.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.t",
+      "uX": 5.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.y",
+      "uX": 6.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.u",
+      "uX": 7.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.i",
+      "uX": 8.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.o",
+      "uX": 9.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.p",
+      "uX": 10.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.left.bracket",
+      "uX": 11.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.right.bracket",
+      "uX": 12.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.enter",
+      "uX": 13.5,
+      "uY": 2,
+      "uWidth": 1.5,
+      "uHeight": 2.0,
+      "isIsoEnter": true
+    },
+    {
+      "id": "key.keyboard.caps.lock",
+      "uX": 0,
+      "uY": 3,
+      "uWidth": 1.75
+    },
+    {
+      "id": "key.keyboard.a",
+      "uX": 1.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.s",
+      "uX": 2.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.d",
+      "uX": 3.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.f",
+      "uX": 4.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.g",
+      "uX": 5.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.h",
+      "uX": 6.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.j",
+      "uX": 7.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.k",
+      "uX": 8.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.l",
+      "uX": 9.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.semicolon",
+      "uX": 10.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.apostrophe",
+      "uX": 11.75,
+      "uY": 3
+    },
+    {
+      "id": "key.keyboard.world.1",
+      "uX": 0,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.left.shift",
+      "uX": 1,
+      "uY": 4,
+      "uWidth": 1.75
+    },
+    {
+      "id": "key.keyboard.z",
+      "uX": 2.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.x",
+      "uX": 3.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.c",
+      "uX": 4.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.v",
+      "uX": 5.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.b",
+      "uX": 6.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.n",
+      "uX": 7.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.m",
+      "uX": 8.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.comma",
+      "uX": 9.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.period",
+      "uX": 10.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.slash",
+      "uX": 11.75,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.right.shift",
+      "uX": 12.75,
+      "uY": 4,
+      "uWidth": 2.25
+    },
+    {
+      "id": "key.keyboard.left.control",
+      "uX": 0,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.left.win",
+      "uX": 1.25,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.left.alt",
+      "uX": 2.5,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.space",
+      "uX": 3.75,
+      "uY": 5,
+      "uWidth": 6.25
+    },
+    {
+      "id": "key.keyboard.right.alt",
+      "uX": 10,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.right.win",
+      "uX": 11.25,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.menu",
+      "uX": 12.5,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.right.control",
+      "uX": 13.75,
+      "uY": 5,
+      "uWidth": 1.25
+    },
+    {
+      "id": "key.keyboard.insert",
+      "uX": 15.5,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.home",
+      "uX": 16.5,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.page.up",
+      "uX": 17.5,
+      "uY": 1
+    },
+    {
+      "id": "key.keyboard.delete",
+      "uX": 15.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.end",
+      "uX": 16.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.page.down",
+      "uX": 17.5,
+      "uY": 2
+    },
+    {
+      "id": "key.keyboard.up",
+      "uX": 17.5,
+      "uY": 4
+    },
+    {
+      "id": "key.keyboard.left",
+      "uX": 15.5,
+      "uY": 5
+    },
+    {
+      "id": "key.keyboard.down",
+      "uX": 16.5,
+      "uY": 5
+    },
+    {
+      "id": "key.keyboard.right",
+      "uX": 17.5,
+      "uY": 5
+    }
+  ]
+}
