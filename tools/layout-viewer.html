@@ -69,7 +69,8 @@ function render() {
   const W = L.totalWidthU * U + PAD * 2, H = 6 * U + PAD * 2;
   let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
   for (const k of L.keys) {
-    const x = PAD + k.uX * U, y = PAD + k.uY * U, w = k.uWidth * U - GAP, h = k.uHeight * U - GAP;
+    const kw = k.uWidth || 1, kh = k.uHeight || 1;
+    const x = PAD + k.uX * U, y = PAD + k.uY * U, w = kw * U - GAP, h = kh * U - GAP;
     const cls = NAV.test(k.id) ? 'nav' : MOD.test(k.id) ? 'mod' : '';
     let shape;
     if (k.isIsoEnter) {
@@ -118,7 +119,8 @@ function renderCustom() {
   const W = L.totalWidthU * U + PAD * 2, H = 6 * U + PAD * 2;
   let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
   for (const k of L.keys) {
-    const x = PAD + k.uX * U, y = PAD + k.uY * U, w = k.uWidth * U - GAP, h = k.uHeight * U - GAP;
+    const kw = k.uWidth || 1, kh = k.uHeight || 1;
+    const x = PAD + k.uX * U, y = PAD + k.uY * U, w = kw * U - GAP, h = kh * U - GAP;
     s += `<rect class="key" x="${x}" y="${y}" width="${w}" height="${h}" rx="4" data-id="${k.id}"/>` +
          `<text x="${x + w/2}" y="${y + h/2 + 4}" text-anchor="middle" font-size="10">${esc(k.id)}</text>`;
   }
