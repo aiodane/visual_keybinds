@@ -155,7 +155,11 @@ def layout_75(std):
             keys.append(key("page.up", 15, 2))
             keys.append(key("page.down", 15, 3))
             # ro key (backslash/underscore) between slash and right shift, right shift shrunk to 1.75u
-            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash","backslash",("right.shift",1.75),"up"])
+            keys += row(4, 0, [("left.shift",2.25)] + ZXCV + ["comma","period","slash","backslash",("right.shift",1.75),"end"])
+            # JIS 75: shorter spacebar so the arrow row fits left/up/down/right on the bottom row
+            keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",5.25),
+                                "right.alt","right.win","right.control","left","up","down","right"])
+            return keys, 16.0
         keys += row(5, 0, [("left.control",1.25),("left.win",1.25),("left.alt",1.25),("space",6.25),
                             "right.alt","right.win","right.control","left","down","right"])
     return keys, 16.0

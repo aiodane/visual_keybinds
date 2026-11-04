@@ -520,7 +520,7 @@
       "uHeight": 1.0
     },
     {
-      "id": "key.keyboard.up",
+      "id": "key.keyboard.end",
       "uX": 15.0,
       "uY": 4.0,
       "uWidth": 1.0,
@@ -551,32 +551,39 @@
       "id": "key.keyboard.space",
       "uX": 3.75,
       "uY": 5.0,
-      "uWidth": 6.25,
+      "uWidth": 5.25,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.right.alt",
-      "uX": 10.0,
+      "uX": 9.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.right.win",
-      "uX": 11.0,
+      "uX": 10.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.right.control",
-      "uX": 12.0,
+      "uX": 11.0,
       "uY": 5.0,
       "uWidth": 1.0,
       "uHeight": 1.0
     },
     {
       "id": "key.keyboard.left",
+      "uX": 12.0,
+      "uY": 5.0,
+      "uWidth": 1.0,
+      "uHeight": 1.0
+    },
+    {
+      "id": "key.keyboard.up",
       "uX": 13.0,
       "uY": 5.0,
       "uWidth": 1.0,
