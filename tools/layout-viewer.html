@@ -209,8 +209,8 @@ function isIsoEnterKey(k) {
 // the bottom bar is uWidth wide and spans both rows (right-aligned),
 // the top bar is 0.25u wider and extends to the LEFT over the tab row
 function buildIsoEnterShape(x, y, w, h) {
-  const lip = 0.25 * U; // extra width of the top bar, extending left
-  const midY = y + U;   // bottom edge of the top (wider) bar
+  const lip = 0.25 * U;   // extra width of the top bar, extending left
+  const midY = y + U - GAP; // bottom edge of the top bar, keeping the usual gap to the row below
 
   // Polygon points (L-shape, wide part top-left):
   // 1. Top-left (extended to the left)
